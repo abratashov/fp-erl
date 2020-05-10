@@ -21,6 +21,7 @@ testFun(XorFun) ->
     (XorFun(false, false) == false).
 
 test() ->
-    testFun(fun xOr1/2) and
-    testFun(fun xOr2/2) and
-    testFun(fun xOr3/2).
+    true = testFun(fun xOr1/2),
+    true = testFun(fun xOr2/2),
+    true = testFun(fun xOr3/2),
+    ok.

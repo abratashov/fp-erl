@@ -19,11 +19,13 @@ howManyEqual(_, _, _) ->
 % Tests
 
 testMaxThree() ->
-    maxThree(34, 25, 36) == 36.
+    true = (maxThree(34, 25, 36) == 36),
+    ok.
 
 testHowManyEqual() ->
-    (howManyEqual(1, 2, 3) == 0) and
-    (howManyEqual(1, 1, 0) == 2) and
-    (howManyEqual(1, 0, 1) == 2) and
-    (howManyEqual(0, 1, 1) == 2) and
-    (howManyEqual(1, 1, 1) == 3).
+    true = ((howManyEqual(1, 2, 3) == 0)),
+    true = ((howManyEqual(1, 1, 0) == 2)),
+    true = ((howManyEqual(1, 0, 1) == 2)),
+    true = ((howManyEqual(0, 1, 1) == 2)),
+    true = ((howManyEqual(1, 1, 1) == 3)),
+    ok.
