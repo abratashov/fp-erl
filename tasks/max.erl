@@ -23,9 +23,9 @@ testMaxThree() ->
     ok.
 
 testHowManyEqual() ->
-    true = ((howManyEqual(1, 2, 3) == 0)),
-    true = ((howManyEqual(1, 1, 0) == 2)),
-    true = ((howManyEqual(1, 0, 1) == 2)),
-    true = ((howManyEqual(0, 1, 1) == 2)),
-    true = ((howManyEqual(1, 1, 1) == 3)),
+    0 = howManyEqual(1, 2, 3),
+    2 = howManyEqual(1, 1, 0),
+    2 = howManyEqual(1, 0, 1),
+    2 = howManyEqual(0, 1, 1),
+    3 = howManyEqual(1, 1, 1),
     ok.
