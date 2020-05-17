@@ -4,7 +4,12 @@
   product/2,
   max/1,
   max/2,
+  double/1,
+  evens/1,
   test_product/0,
+  test_max/0,
+  test_double/0,
+  test_evens/0,
   test/0
 ]).
 
@@ -17,6 +22,16 @@ max([H|T]) -> max(T, H).
 max([], Max) -> Max;
 max([H|T], Max) when H > Max -> max(T, H);
 max([H|T], Max) when H < Max -> max(T, Max).
+
+double([]) -> [];
+double([H|T]) -> [H*2 | double(T)].
+
+evens([]) -> [];
+evens([H|T]) ->
+  case H rem 2 of
+    0 -> [H | evens(T)];
+    _ -> evens(T)
+  end.
 
 % Tests
 
@@ -36,7 +51,27 @@ test_max() ->
   40 = max([10,2,3,40,5]),
   ok.
 
+test_double() ->
+  [] = double([]),
+  [2] = double([1]),
+  [2,4] = double([1,2]),
+  [2,4,6] = double([1,2,3]),
+  [2,24,6,8] = double([1,12,3,4]),
+  [20,4,6,80,10] = double([10,2,3,40,5]),
+  ok.
+
+test_evens() ->
+  [] = evens([]),
+  [] = evens([1]),
+  [2] = evens([1,2]),
+  [2] = evens([1,2,3]),
+  [12,4] = evens([1,12,3,4]),
+  [10,2,40] = evens([10,2,3,40,5]),
+  ok.
+
 test() ->
   ok = test_product(),
   ok = test_max(),
+  ok = test_double(),
+  ok = test_evens(),
   ok.
