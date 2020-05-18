@@ -7,11 +7,16 @@
   double/1,
   evens/1,
   take/2,
+  exists/2,
+  nub/1,
+  nub/2,
   test_product/0,
   test_max/0,
   test_double/0,
   test_evens/0,
   test_take/0,
+  test_exists/0,
+  test_nub/0,
   test/0
 ]).
 
@@ -38,6 +43,17 @@ evens([H|T]) ->
 take(0, _) -> [];
 take(N, [H|T]) when N > 0 ->
   [H | take(N - 1, T)].
+
+exists(E, []) -> false;
+exists(E, [H|T]) -> E == H orelse exists(E, T).
+
+nub([]) -> [];
+nub(L) -> nub(L, []).
+nub([H|T], Result) ->
+  case exists(H, Result) of
+    true -> nub(T, Result);
+    false -> nub(T, [H|Result])
+  end.
 
 % Tests
 
@@ -82,10 +98,24 @@ test_take() ->
   [1,2,3,4,5] = take(5, [1,2,3,4,5]),
   ok.
 
+test_exists() ->
+  false = exists(0, []),
+  false = exists(0, [1,2,3,4,5]),
+  true = exists(2, [1,2,3,4,5]),
+  ok.
+
+test_nub() ->
+  [] = nub([]),
+  [1] = nub([1]),
+  [1,2,3] = nub([1,2,3]),
+  [1,2,3,4,5,7] = nub([1,2,3,4,5,1,2,5,7]),
+  ok.
+
 test() ->
   ok = test_product(),
   ok = test_max(),
   ok = test_double(),
   ok = test_evens(),
   ok = test_take(),
+  ok = test_exists(),
   ok.
