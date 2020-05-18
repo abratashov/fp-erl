@@ -6,10 +6,12 @@
   max/2,
   double/1,
   evens/1,
+  take/2,
   test_product/0,
   test_max/0,
   test_double/0,
   test_evens/0,
+  test_take/0,
   test/0
 ]).
 
@@ -32,6 +34,10 @@ evens([H|T]) ->
     0 -> [H | evens(T)];
     _ -> evens(T)
   end.
+
+take(0, _) -> [];
+take(N, [H|T]) when N > 0 ->
+  [H | take(N - 1, T)].
 
 % Tests
 
@@ -69,9 +75,17 @@ test_evens() ->
   [10,2,40] = evens([10,2,3,40,5]),
   ok.
 
+test_take() ->
+  [] = take(0, [1,2,3,4,5]),
+  [1] = take(1, [1,2,3,4,5]),
+  [1,2] = take(2, [1,2,3,4,5]),
+  [1,2,3,4,5] = take(5, [1,2,3,4,5]),
+  ok.
+
 test() ->
   ok = test_product(),
   ok = test_max(),
   ok = test_double(),
   ok = test_evens(),
+  ok = test_take(),
   ok.
