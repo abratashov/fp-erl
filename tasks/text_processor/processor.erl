@@ -7,9 +7,6 @@
   get_file_contents/1
 ]).
 
-example_text() ->
-  ["ab", "cd", "efgh"].
-
 text_to_words(Text) ->
   Words = string:tokens(string:join(Text, " "), " "),
   % io:format("~p~n",[Words]),
@@ -33,6 +30,9 @@ align(File, LineSize) ->
 
 
 % Tests
+
+example_text() ->
+  ["ab", "cd", "efgh"].
 
 test_align_example_text() ->
   ["ab cd", "efgh"].
