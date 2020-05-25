@@ -3,6 +3,8 @@
   double_all/1,
   evens/1,
   product/1,
+  zip/2,
+  zip_with/3,
   test/0
 ]).
 
@@ -17,10 +19,8 @@ zip([], _, Result) -> lists:reverse(Result);
 zip(_, [], Result) -> lists:reverse(Result);
 zip([H1|T1], [H2|T2], Result) -> zip(T1, T2, [{H1,H2}|Result]).
 
-zip_with(Func, L1, L2) -> zip_with(Func, L1, L2, []).
-zip_with(Func, [], _, Result) -> lists:reverse(Result);
-zip_with(Func, _, [], Result) -> lists:reverse(Result);
-zip_with(Func, [H1|T1], [H2|T2], Result) -> zip_with(Func, T1, T2, [Func(H1,H2)|Result]).
+zip_with(Func, L1, L2) -> lists:map(fun({X,Y}) -> Func(X,Y) end, zip(L1, L2)).
+
 % Tests
 
 test_double_all() ->
